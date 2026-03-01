@@ -42,6 +42,13 @@ class _HomePageState extends State<HomePage> {
               },
               child: Text('Scan QR Code'),
             ),
+            SizedBox(height: 48),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {});
+              },
+              child: Text('Generate QR Code'),
+            ),
           ],
         ),
       ),
