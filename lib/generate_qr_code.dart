@@ -10,21 +10,27 @@ class GenerateQrCode extends StatefulWidget {
 
 class _GenerateQrCodeState extends State<GenerateQrCode> {
   TextEditingController urlController = TextEditingController();
+  String qrData = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Generate QR Code')),
+      appBar: AppBar(title: const Text('Generate QR Code')),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (urlController.text.isNotEmpty)
-                QrImageView(data: urlController.text, size: 20),
-              SizedBox(height: 18),
-              Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
+              if (qrData.isNotEmpty)
+                QrImageView(
+                  data: qrData,
+                  size: 200, // size barha diya
+                ),
+
+              const SizedBox(height: 18),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: urlController,
                   decoration: InputDecoration(
@@ -36,8 +42,17 @@ class _GenerateQrCodeState extends State<GenerateQrCode> {
                   ),
                 ),
               ),
-              SizedBox(height: 18),
-              ElevatedButton(onPressed: () {}, child: Text('Generate QR Code')),
+
+              const SizedBox(height: 18),
+
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    qrData = urlController.text;
+                  });
+                },
+                child: const Text('Generate QR Code'),
+              ),
             ],
           ),
         ),
